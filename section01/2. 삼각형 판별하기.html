@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 3개의 수로 삼각형을 만들 수 있는지 "YES", "NO" 로 출력
+      // 가장 긴 변의 길이가 다른 두 변의 합보다 작아야 한다.
+      const solution = (a, b, c) => {
+        let answer, max;
+        const SUM = a + b + c;
+        max = a > b ? a : b;
+        max = max > c ? max : c;
+        answer = max < SUM - max ? "YES" : "NO";
+        return answer;
+      };
+
+      console.log(solution(13, 33, 17));
+    </script>
+  </body>
+</html>

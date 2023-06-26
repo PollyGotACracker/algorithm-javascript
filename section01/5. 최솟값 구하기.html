@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 7개의 수가 배열로 주어지면 그 중 최솟값 출력
+      // let min = Number.MAX_SAFE_INTEGER: 첫 번째 수는 무조건 min 에 할당
+      // cf) Math.min(...arr), Math.max(...arr)
+      const solution = (arr) => {
+        let answer,
+          min = arr[0];
+        for (let i = 0; i < arr.length - 1; i++) {
+          min = arr[i] < min ? arr[i] : min;
+        }
+        answer = min;
+        return answer;
+      };
+
+      let arr = [5, 7, 1, 3, 2, 9, 11];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>

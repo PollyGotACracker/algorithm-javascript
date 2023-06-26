@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 일곱 난쟁이의 키의 합이 100 이고, 아홉 명의 난쟁이들의 키가 배열로 주어졌을 때
+      // 진짜 일곱 난쟁이의 키를 배열로 출력
+      // 배열 메서드 사용 가능
+      const solution = (arr) => {
+        let answer = [];
+        const sum = arr.reduce((acc, cur) => acc + cur, 0);
+        for (let i = 0; i < arr.length - 1; i++) {
+          for (let j = i + 1; j < arr.length; j++) {
+            if (sum - (arr[i] + arr[j]) === 100) {
+              // answer 를 arr 로 초기화하고 splice() 로 요소를 제거할 수 있음
+              answer = arr.filter((ele) => ele !== arr[i] && ele !== arr[j]);
+              break;
+            }
+          }
+        }
+        return answer;
+      };
+
+      let arr = [22, 7, 21, 19, 10, 15, 25, 8, 13];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>

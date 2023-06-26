@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 7개의 자연수가 주어질 때, 그 중 홀수의 합과 홀수 중 최솟값을 배열로 출력
+      const solution = (arr) => {
+        let answer = [];
+        let oddSum = 0,
+          oddMin = Number.MAX_SAFE_INTEGER;
+        for (let i of arr) {
+          if (i % 2 === 1) {
+            if (i < oddMin) oddMin = i;
+            oddSum += i;
+          }
+        }
+        answer.push(oddSum);
+        answer.push(oddMin);
+        return answer;
+      };
+
+      arr = [12, 77, 38, 41, 53, 92, 85];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>

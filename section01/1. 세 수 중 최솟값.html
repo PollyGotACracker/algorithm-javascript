@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 배열 메서드를 사용하지 않고 3개의 숫자 중 최솟값 출력
+      const solution = (a, b, c) => {
+        let answer;
+        answer = a < b ? a : b;
+        answer = answer < c ? answer : c;
+        return answer;
+      };
+
+      console.log(solution(2, 5, 1));
+    </script>
+  </body>
+</html>
