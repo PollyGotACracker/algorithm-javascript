@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 입력받은 문자열의 소문자를 대문자로 모두 통일하여 문자열 출력
+      const solution = (s) => {
+        let answer = "";
+        for (let i of s) {
+          let num = i.charCodeAt();
+          if (num >= 97 && num <= 122) {
+            num -= 32;
+            answer += String.fromCharCode(num);
+          } else {
+            answer += i;
+          }
+        }
+        return answer;
+      };
+
+      let str = "ItisTimeToStudy";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>

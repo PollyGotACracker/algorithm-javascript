@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 문자열을 입력받아 해당 문자열의 알파벳 대문자 개수를 출력
+      const solution = (s) => {
+        let answer = 0;
+        for (let i of s) {
+          let num = i.charCodeAt();
+          if (num >= 65 && num < 97) answer++;
+        }
+        return answer;
+      };
+
+      let str = "KoreaTimeGood";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>

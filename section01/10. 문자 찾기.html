@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 문자열과 특정 문자를 입력 받아,
+      // 해당 문자열에 문자가 몇 개 존재하는지 출력
+      const solution = (s, t) => {
+        let answer = 0;
+        for (let i of s) {
+          i === t && answer++;
+        }
+        return answer;
+      };
+
+      let str = "COMPUTERPROGRAMMING";
+      console.log(solution(str, "R"));
+    </script>
+  </body>
+</html>

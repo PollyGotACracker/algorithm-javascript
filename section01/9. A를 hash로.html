@@ -1,0 +1,21 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 대문자로 이루어진 영단어에서 "A" 를 모두 "#" 로 바꾸어 출력
+      const solution = (s) => {
+        let answer = "";
+        for (let i of s) {
+          answer += i === "A" ? "#" : i;
+        }
+        return answer;
+      };
+
+      let str = "BANANA";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 문자열의 대문자는 소문자로, 소문자는 대문자로 변환하여 출력
+      const solution = (s) => {
+        let answer = "";
+        for (let i of s) {
+          let num = i.charCodeAt();
+          if (num >= 65 && num < 97) num += 32;
+          else if (num >= 97 && num <= 122) num -= 32;
+          answer += String.fromCharCode(num);
+        }
+        return answer;
+      };
+
+      console.log(solution("StuDY"));
+    </script>
+  </body>
+</html>
