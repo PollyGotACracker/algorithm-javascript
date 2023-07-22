@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 선생님이 여러 학생을 일렬로 세웠을 때,
+      // 맨 앞에 서 있는 선생님이 볼 수 있는 학생의 수를 출력
+      // (학생은 자신 앞에 서 있는 학생들보다 키가 커야만 보인다)
+      const solution = (arr) => {
+        let answer = 1;
+        let max = arr[0];
+        for (let i = 1; i < arr.length; i++) {
+          if (arr[i] > max) {
+            answer++;
+            max = arr[i];
+          }
+        }
+
+        return answer;
+      };
+
+      let arr = [130, 135, 148, 140, 145, 150, 150, 153];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>

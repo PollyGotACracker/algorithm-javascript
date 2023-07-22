@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 여러 개의 OX 문제로 만들어진 시험에서 연속으로 답을 맞히는 경우 다음과 같이 가산점을 준다.
+      // 1. 1번 문제를 맞힐 경우에는 1점으로 계산한다.
+      // 2. 앞 문제에서 답을 틀리다가 답을 맞힌 문제는 1점으로 계산한다.
+      // 3. 연속으로 답을 맞힐 경우 두 번째 문제는 2점, 세 번째 문제는 3점, ..., K번째 문제는 K점으로 계산한다.
+      // 4. 틀린 문제는 0점으로 계산한다.
+      // 채점 결과가 0과 1로 이루어진 배열로 주어졌을 때, 총 점수를 계산하여 출력
+      const solution = (arr) => {
+        let answer = 0;
+        let acc = 0;
+        for (let value of arr) {
+          acc = value ? acc + 1 : 0;
+          answer += acc;
+        }
+        return answer;
+      };
+
+      let arr = [1, 0, 1, 1, 1, 0, 0, 1, 1, 0];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>

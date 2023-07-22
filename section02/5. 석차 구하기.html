@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 여러 학생의 국어 점수가 배열로 주어지면, 점수가 입력된 순서대로 각 학생의 석차를 배열로 출력
+      // 단, 같은 점수를 받은 학생들은 같은 석차로 처리하고,
+      // 그보다 바로 아래 점수를 받은 학생은 상위 점수를 받은 학생 수를 고려한 석차로 처리한다.
+      const solution = (arr) => {
+        let answer = [];
+        for (let i of arr) {
+          let n = 1;
+          for (let j of arr) {
+            if (i < j) n++;
+          }
+          answer.push(n);
+        }
+
+        return answer;
+      };
+
+      let arr = [87, 89, 92, 100, 76];
+      console.log(solution(arr));
+
+      /*
+        let n = arr.length;
+        let answer = Array.from({ length: n }, () => 1); // [1, 1, 1, 1, 1]
+        for (let i = 0; i < n; i++) {
+          for (let j = 0; j < n; j++) {
+            if (arr[j] > arr[i]) answer[i]++;
+          }
+        }
+      */
+    </script>
+  </body>
+</html>

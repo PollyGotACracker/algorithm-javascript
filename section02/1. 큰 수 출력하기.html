@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 1개 이상 100개 이하의 정수 배열을 받아
+      // 자신의 바로 앞 수보다 큰 수만 배열로 출력(0 번째 수 무조건 포함)
+      const solution = (arr) => {
+        let answer = [];
+        answer.push(arr[0]);
+        for (let i = 1; i < arr.length; i++) {
+          if (arr[i] > arr[i - 1]) {
+            answer.push(arr[i]);
+          }
+        }
+        return answer;
+      };
+
+      let arr = [7, 3, 9, 5, 6, 12];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
