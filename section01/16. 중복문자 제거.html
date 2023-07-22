@@ -1,0 +1,27 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 소문자로 된 문자열을 받아 중복 문자를 제거 후 출력
+      // 각 문자의 순서를 유지할 것
+      const solution = (s) => {
+        let answer = "";
+        for (let char of s) {
+          if (!answer.includes(char)) answer += char;
+        }
+
+        return answer;
+      };
+
+      console.log(solution("ksekkset"));
+      /*
+        for (let i = 0; i < s.length; i++) {
+          if(s.indexOf(s[i]) === i) answer += s[i];
+        }
+      */
+    </script>
+  </body>
+</html>

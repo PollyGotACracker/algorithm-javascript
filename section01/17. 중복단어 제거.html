@@ -1,0 +1,29 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // N개의 문자열이 배열로 주어지면 중복된 문자열은 제거 후 출력
+      // 출력된 문자열은 기존 입력순서 유지
+      const solution = (s) => {
+        let answer = s;
+        for (let i = 0; i < s.length; i++) {
+          for (let j = i + 1; j < s.length; j++) {
+            if (s[i] === s[j]) answer.splice(j, 1);
+          }
+        }
+        return answer;
+      };
+
+      let str = ["good", "time", "good", "time", "student"];
+      console.log(solution(str));
+      /*
+        answer = s.filter(function(v, i) {
+          return s.indexOf(v) === i;
+        });
+      */
+    </script>
+  </body>
+</html>

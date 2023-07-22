@@ -7,13 +7,13 @@
     <script>
       // 소문자로 된 문자열을 받아 그 단어의 가운데 문자를 출력
       // 단어의 길이가 짝수일 경우 가운데 2개의 문자를 출력
-
       const solution = (s) => {
         let answer = "";
         const median = Math.floor(s.length / 2);
         answer += s.length % 2 === 1 ? s[median] : s[median - 1] + s[median];
         return answer;
       };
+
       console.log(solution("study"));
     </script>
   </body>
