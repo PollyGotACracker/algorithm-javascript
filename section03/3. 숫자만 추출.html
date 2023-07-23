@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 문자와 숫자가 섞여있는 문자열이 주어지면
+      // 그 중 숫자만 추출한 후 주어진 순서 그대로 출력
+      const solution = (str) => {
+        let answer = 0;
+        const regex = /[^0-9]/g;
+        const numbers = str.replace(regex, "");
+        answer = parseInt(numbers);
+
+        return answer;
+      };
+
+      let str = "g0en2T0s8eSoft";
+      console.log(solution(str));
+
+      /*
+        let answer = "";
+        for (let x of str) {
+          if (!isNaN(x)) answer += x;
+        }
+        return parseInt(answer);
+      */
+    </script>
+  </body>
+</html>

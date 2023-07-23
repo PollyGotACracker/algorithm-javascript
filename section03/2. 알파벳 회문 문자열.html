@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 해당 문자열이 회문(팰린드롬)이면 "YES", 아니면 “NO"를 출력
+      // 단, 알파벳만 가지고 회문을 검사하며, 알파벳 이외의 문자들은 무시한다.
+      // 대소문자를 구분하지 않는다.
+      const solution = (s) => {
+        let answer = "";
+        const regex = /[^a-z]+/g;
+        const text = s.toLowerCase().replace(regex, "");
+        const reverse = text.split("").reverse().join("");
+        answer = reverse === text ? "YES" : "NO";
+
+        return answer;
+      };
+
+      let str = "found7, time: study; Yduts; emit, 7Dnuof";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>
