@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 선생님의 예산으로 최대 몇 명의 학생에게 졸업선물을 줄 수 있는지 출력
+      // 첫 번째 인자는 선생님의 예산, 두 번째 인자는 각 학생들이 원하는 상품의 가격과 배송비가 있는 2차원 배열이다.
+      // 선생님은 50% 할인 쿠폰을 사용하여 상품 하나를 할인 받을 수 있다. 단, 배송비는 할인되지 않는다.
+      const solution = (m, product) => {
+        let answer = 0;
+        let cost = 0;
+        const LENGTH = product.length;
+
+        product.sort((a, b) => (a[0] === b[0] ? a[1] - b[1] : a[0] - b[0]));
+        for (let [index, [item, fee]] of product.entries()) {
+          if (index === LENGTH - 1) item = item * 0.5;
+          const price = item + fee;
+          if (cost + price <= m) {
+            cost += price;
+            answer++;
+          }
+        }
+
+        return answer;
+      };
+
+      let arr = [
+        [6, 6],
+        [2, 2],
+        [4, 3],
+        [4, 5],
+        [10, 3],
+      ];
+      console.log(solution(28, arr));
+
+      /*
+      let answer = 0;
+      let n = product.length;
+      product.sort((a, b) => a[0] + a[1] - (b[0] + b[1]));
+      for (let i = 0; i < n; i++) {
+        let money = m - (product[i][0] / 2 + product[i][1]);
+        let cnt = 1;
+        for (let j = 0; j < n; j++) {
+          if (j !== i && product[j][0] + product[j][1] > money) break;
+          if (j !== i && product[j][0] + product[j][1] <= money) {
+            money -= product[j][0] + product[j][1];
+            cnt++;
+          }
+        }
+        answer = Math.max(answer, cnt);
+      }
+      return answer;
+      */
+    </script>
+  </body>
+</html>

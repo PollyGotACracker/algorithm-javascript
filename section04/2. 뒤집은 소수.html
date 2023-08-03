@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // N개의 자연수가 배열로 주어지면, 각 자연수의 자릿수를 뒤집은 수가 소수일 때 그 소수를 배열로 전부 출력
+      // 단, 첫 자리의 0은 모두 무시한다.
+      const isPrime = (num) => {
+        if (num === 1) return false;
+        for (let i = 2; i <= Math.sqrt(num); i++) {
+          if (num % i === 0) return false;
+        }
+        return true;
+      };
+
+      const solution = (arr) => {
+        let answer = [];
+        for (let num of arr) {
+          let i = num;
+          // let reverse = Number(num.toString().split("").reverse().join(""));
+          let reverse = 0;
+          while (i) {
+            let digit = i % 10;
+            reverse = reverse * 10 + digit;
+            i = ~~(i / 10);
+          }
+          if (isPrime(reverse)) answer.push(reverse);
+        }
+
+        return answer;
+      };
+
+      let arr = [32, 55, 62, 20, 250, 370, 200, 30, 100];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
