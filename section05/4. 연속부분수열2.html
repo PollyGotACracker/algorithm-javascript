@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 특정 숫자 M과 N개의 배열이 주어졌을 때
+      // 배열에서 연속부분수열의 합이 M 이하가 되는 가짓수를 출력
+      // 만약 5와 [1, 3, 1, 2, 3] 이 주어지면,
+      // 연속부분수열은 {1}, {3}, {1}, {2}, {3}, {1, 3}, {3, 1}, {1, 2}, {2, 3}, {1, 3, 1} 이므로 10 을 출력한다.
+      const solution = (m, arr) => {
+        let answer = 0,
+          sum = 0,
+          lt = 0;
+
+        for (let rt = 0; rt < arr.length; rt++) {
+          sum += arr[rt];
+          while (sum > m) {
+            sum -= arr[lt++];
+          }
+          answer += rt - lt + 1;
+        }
+        return answer;
+      };
+
+      let a = [1, 3, 1, 2, 3];
+      console.log(solution(5, a));
+    </script>
+  </body>
+</html>
