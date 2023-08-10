@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 각 학생들이 뽑은 학급 회장 후보 기호(알파벳)가 나열된 문자열이 주어지면,
+      // 어떤 후보가 학급 회장이 되었는지 출력
+      // 반드시 한 명의 학급회장이 선출되도록 투표결과가 나왔다고 가정한다.
+      const solution = (s) => {
+        let answer = "";
+        let max = Number.MIN_SAFE_INTEGER;
+        const hash = new Map();
+
+        for (let candidate of s) {
+          // hash.has(candidate)
+          const count = hash.get(candidate) || 0;
+          hash.set(candidate, count + 1);
+        }
+        for (let [candidate, count] of hash) {
+          if (count > max) {
+            answer = candidate;
+            max = count;
+          }
+        }
+        return answer;
+      };
+
+      let str = "BACBACCACCBDEDE";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>

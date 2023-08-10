@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 길이가 같은 두 개의 단어가 주어지면
+      // 두 단어가 아나그램인지 아닌지 YES 또는 NO 로 출력
+      // 아나그램 판별 시 대소문자를 구분한다.
+      const solution = (str1, str2) => {
+        let answer = "YES";
+        const hash = new Map();
+
+        for (let char of str1) {
+          const count = hash.get(char) || 0;
+          hash.set(char, count + 1);
+        }
+        for (let char of str2) {
+          const count = hash.get(char);
+          if (!count) answer = "NO";
+          hash.set(char, count - 1);
+        }
+        return answer;
+      };
+
+      let a = "AbaAeCe";
+      let b = "baeeACA";
+      console.log(solution(a, b));
+
+      let c = "abaCC";
+      let d = "Caaab";
+      console.log(solution(c, d));
+    </script>
+  </body>
+</html>
