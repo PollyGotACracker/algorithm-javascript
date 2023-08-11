@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 후위연산식이 주어지면 연산한 결과를 출력
+      // 만약 후위연산식 352+*9- 이 주어지면, 3*(5+2)-9 을 계산하여 12 를 출력한다.
+      const solution = (s) => {
+        let answer;
+        let stack = [];
+
+        for (let char of s) {
+          if (!isNaN(char)) stack.push(Number(char));
+          else {
+            const num1 = stack.pop();
+            const num2 = stack.pop();
+            if (char === "+") stack.push(num2 + num1);
+            if (char === "-") stack.push(num2 - num1);
+            if (char === "*") stack.push(num2 * num1);
+            if (char === "/") stack.push(num2 / num1);
+          }
+        }
+        answer = stack[0];
+        return answer;
+      };
+
+      let str = "352+*9-";
+      console.log(solution(str));
+    </script>
+  </body>
+</html>

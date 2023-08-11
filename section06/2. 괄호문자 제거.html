@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 주어진 문자열에서 소괄호 ( ) 사이에 존재하는 모든 문자를 제거하고
+      // 남은 문자들만 문자열로 출력
+      const solution = (s) => {
+        let answer = "";
+        const chars = [];
+        for (let char of s) {
+          if (char === "(") chars.push(char);
+          if (char === ")") chars.pop();
+          else {
+            if (chars.length === 0) answer += char;
+          }
+        }
+        return answer;
+      };
+
+      let str = "(A(BC)D)EF(G(H)(IJ)K)LM(N)";
+      console.log(solution(str));
+
+      /*
+      let answer;
+      let stack = [];
+      for (let x of s) {
+        if (x === ")") {
+          while (stack.pop() !== "(");
+        } else stack.push(x);
+      }
+      answer = stack.join("");
+      return answer;
+      */
+    </script>
+  </body>
+</html>

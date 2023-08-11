@@ -1,0 +1,39 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // * 한국정보올림피아드
+      // 레이저는 여는 괄호와 닫는 괄호의 인접한 쌍 () 으로 표현된다.
+      // 쇠막대기의 왼쪽 끝은 여는 괄호 (  로, 오른쪽 끝은 닫힌 괄호 ) 로 표현된다.
+      // 짧은 쇠막대기는 긴 쇠막대기 위로 겹쳐질 수 있다.
+      // 만약 ()(((()())(())()))(()) 이 주어지면,
+      // 1. 가장 위에 놓인 쇠막대기 2개는 각각 3조각, 2조각으로 잘린다.
+      // 2. 그 아래의 긴 쇠막대기 1개는 5조각으로 잘린다.
+      // 3. 가장 아래에 놓인 긴 쇠막대기 하나와 짧은 쇠막대기 하나는 각각 5조각, 2조각으로 잘린다.
+      // 쇠막대기와 레이저의 배치를 나타내는 괄호 문자열이 주어졌을 때, 잘려진 쇠막대기 조각의 총 개수를 출력
+      const solution = (s) => {
+        let answer = 0;
+        let stack = [];
+
+        for (let i = 0; i < s.length; i++) {
+          if (s[i] === "(") stack.push(s[i]);
+          else {
+            stack.pop();
+            if (s[i - 1] === "(") answer += stack.length;
+            else answer++;
+          }
+        }
+        return answer;
+      };
+
+      let a = "()(((()())(())()))(())";
+      console.log(solution(a));
+
+      let b = "(((()(()()))(())()))(()())";
+      console.log(solution(b));
+    </script>
+  </body>
+</html>

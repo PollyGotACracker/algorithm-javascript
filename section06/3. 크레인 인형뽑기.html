@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // * 카카오 기출
+      // 인형뽑기 화면이 2차원 배열 board 로, 사용자의 크레인을 작동시킨 위치가 배열 moves 로 주어진다.
+      // board 의 각 칸에는 0 이상 100 이하의 정수(인형)가 담겨있으며, 0은 빈 칸을 나타낸다.
+      // moves 의 각 숫자는 인형뽑기 화면의 열 위치이다.
+      // 인형을 집어 바구니에 넣으면 밑에서부터 쌓이며, 연속으로 같은 인형(숫자)일 경우 두 개의 인형은 터져 사라진다.
+      // 인형이 없는 곳에서 크레인을 작동시키는 경우에는 아무런 일도 일어나지 않는다.
+      // 크레인을 모두 작동시킨 후 바구니에서 터트려져 사라진 인형의 개수 출력
+      const solution = (board, moves) => {
+        let answer = 0;
+        let stack = [];
+
+        for (let pos of moves) {
+          for (let i = 0; i < board.length; i++) {
+            const value = board[i][pos - 1];
+            if (value !== 0) {
+              if (stack[stack.length - 1] === value) {
+                stack.pop();
+                answer += 2;
+              } else stack.push(value);
+              board[i][pos - 1] = 0;
+              break;
+            }
+          }
+        }
+        return answer;
+      };
+
+      let a = [
+        [0, 0, 0, 0, 0],
+        [0, 0, 1, 0, 3],
+        [0, 2, 5, 0, 1],
+        [4, 2, 4, 4, 2],
+        [3, 5, 1, 3, 1],
+      ];
+      let b = [1, 5, 3, 5, 1, 2, 1, 4];
+      console.log(solution(a, b));
+    </script>
+  </body>
+</html>
