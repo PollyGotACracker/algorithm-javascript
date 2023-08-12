@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 왕자 n 명과 특정 번호 k 가 주어졌을 때, 공주를 구하러 갈 왕자의 번호를 출력
+      // 번호 순의 원형으로 앉은 왕자들이 시계 방향으로 돌아가며 1부터 번호를 외친다.
+      // 한 왕자가 특정 숫자 k 를 외치면 그 왕자는 제외되어 원 밖으로 나가고, 그 다음 왕자가 1부터 번호를 외친다.
+      // 마지막 한 명이 남을 때까지 반복한다.
+      const solution = (n, k) => {
+        let answer;
+        let num = 1;
+        const queue = Array.from({ length: n }, (_, i) => i + 1);
+
+        while (queue.length > 1) {
+          if (num === k) {
+            queue.shift();
+            num = 1;
+          }
+          queue.push(queue.shift());
+          num++;
+        }
+        answer = queue[0];
+        return answer;
+      };
+
+      console.log(solution(8, 3));
+
+      /*
+      let answer;
+      let queue = Array.from({ length: n }, (v, i) => i + 1);
+      while (queue.length) {
+        for (let i = 1; i < k; i++) queue.push(queue.shift());
+        queue.shift();
+        if (queue.length === 1) answer = queue.shift();
+      }
+      return answer;
+      */
+    </script>
+  </body>
+</html>
