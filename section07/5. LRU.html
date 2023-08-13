@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // * 카카오 캐시 문제 변형 - 삽입정렬 응용
+      // LRU 알고리즘(Least Recently Used): 캐시에서 작업을 제거할 때 가장 오랫동안 사용하지 않은 것을 제거
+      // 캐시 사이즈가 5이며 작업이 [2, 3, 1, 6, 7] 순으로 저장되어 있을 때
+      // 맨 앞의 2는 가장 최근에 쓰인 작업이고, 맨 뒤의 7은 가장 오랫동안 쓰이지 않은 작업이다.
+      // Cache Miss : 해야할 작업이 캐시에 없는 상태로 새로운 작업인 5번 작업을 CPU가 사용한다면
+      // 모든 작업이 뒤로 밀리고 5가 캐시의 맨 앞에 위치한다. 7은 캐시에서 삭제된다: [5, 2, 3, 1, 6]
+      // Cache Hit : 위 상태에서, 해야할 작업이 캐시에 있는 상태로 3번 작업을 CPU가 사용한다면
+      // 3번 앞에 있는 5, 2는 한 칸씩 뒤로 밀리고, 3이 맨 앞으로 위치하게 된다: [3, 5, 2, 1, 6]
+      // 캐시의 크기 size 가 주어지고, 캐시가 비어있는 상태에서 N개의 작업 arr 을 CPU가 차례로 처리할 때,
+      // 모든 작업을 처리한 후 캐시메모리의 상태를 가장 최근 사용된 작업부터 차례대로 출력
+      const solution = (size, arr) => {
+        const answer = [];
+
+        for (let i = 0; i < arr.length; i++) {
+          // let pos = -1;
+          // for (let j = 0; j < size; j++) {
+          //   if (arr[i] === answer[j]) pos = j;
+          // }
+          const pos = answer.indexOf(arr[i]);
+
+          if (pos === -1) {
+            answer.unshift(arr[i]);
+            if (answer.length > size) answer.pop();
+          } else {
+            answer.splice(pos, 1);
+            answer.unshift(arr[i]);
+          }
+        }
+        return answer;
+      };
+
+      let arr = [1, 2, 3, 2, 6, 2, 3, 5, 7];
+      console.log(solution(5, arr));
+    </script>
+  </body>
+</html>

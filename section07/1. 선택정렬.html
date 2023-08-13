@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 숫자로 이루어진 배열이 주어지면 오름차순으로 선택정렬
+      const solution = (arr) => {
+        const answer = arr;
+
+        for (let i = 0; i < arr.length; i++) {
+          let idx = i;
+          for (let j = i; j < arr.length; j++) {
+            if (arr[j] < arr[idx]) idx = j;
+          }
+          [arr[idx], arr[i]] = [arr[i], arr[idx]];
+        }
+        return answer;
+      };
+
+      let arr = [13, 5, 11, 7, 23, 15];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
