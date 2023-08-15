@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 각 회의에 대해 시작시간과 끝나는 시간이 주어지면, 회의실을 사용할 수 있는 회의의 최대 가짓수를 출력
+      // 회의는 동시에 진행할 수 없으며, 한번 시작하면 중간에 중단될 수 없다.
+      // 한 회의가 끝나자마자 다음 회의를 시작할 수 있다.
+      const solution = (meeting) => {
+        let answer = 0;
+        let endTime = 0;
+
+        meeting.sort((a, b) => {
+          return a[1] === b[1] ? a[0] - b[0] : a[1] - b[1];
+        });
+        for (let i of meeting) {
+          if (i[0] >= endTime) {
+            answer++;
+            endTime = i[1];
+          }
+        }
+        return answer;
+      };
+
+      let arr = [
+        [1, 4],
+        [2, 3],
+        [3, 5],
+        [4, 6],
+        [5, 7],
+      ];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
