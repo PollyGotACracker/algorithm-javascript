@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 가수가 라이브에서 순서대로 부른 곡의 길이가 분 단위로(자연수) 주어질 때, DVD의 최소 용량 크기를 출력
+      // DVD에 녹화할 때에는 라이브에서의 순서가 그대로 유지되어야 한다.
+      // 즉, 1번과 5번 노래 영상을 같은 DVD에 녹화하기 위해서는 1번과 5번 사이의 모든 영상을 같은 DVD에 녹화해야 한다.
+      // 모든 영상을 M개의 DVD로 나눠서 녹화할 때, 녹화된 영상의 크기와 상관없이 각 DVD 의 용량 크기는 동일하다.
+      // 이때 DVD의 용량 크기(녹화 가능한 길이)는 최소로 해야 한다.
+      const count = (songs, capacity) => {
+        // cnt: 현재 mid 일 때 사용될 DVD의 수. 첫 loop 일 때 1
+        // sum: 각 DVD의 용량 크기
+        let cnt = 1,
+          sum = 0;
+        for (let song of songs) {
+          // 총 용량 크기에 현재 영상 크기를 더한 값이 mid 보다 크다면
+          if (sum + song > capacity) {
+            cnt++;
+            sum = song;
+          } else sum += song;
+        }
+        return cnt;
+      };
+
+      const solution = (m, songs) => {
+        let answer = 0;
+        // songs 는 순서대로 담아야하므로 정렬해선 안된다
+        // DVD 최소 용량은 9 ~ 45 사이의 값이 될 것이다
+        let lt = Math.max(...songs);
+        let rt = songs.reduce((acc, ele) => acc + ele, 0);
+
+        // 최적값을 찾는 것이므로 중간에 break 하지 않는다
+        while (lt <= rt) {
+          // mid: DVD 최소 용량의 예상값
+          let mid = parseInt((lt + rt) / 2);
+          // mid 값까지 배열 요소를 더했을 때의 총 DVD 수가 m보다 작거나 같다면
+          // 값이 m보다 작더라도 m 만큼 나눠서 녹화할 수 있으므로 문제되지 않는다
+          if (count(songs, mid) <= m) {
+            answer = mid;
+            rt = mid - 1;
+          } else lt = mid + 1;
+        }
+        return answer;
+      };
+
+      let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+      console.log(solution(3, arr));
+    </script>
+  </body>
+</html>

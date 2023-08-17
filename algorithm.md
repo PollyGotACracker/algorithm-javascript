@@ -1,5 +1,7 @@
 # Algorithm
 
+- [wikidocs.net: 다빈치코딩 알고리즘](https://wikidocs.net/book/10280)
+
 ## Two Pointers Algorithm;투 포인터 알고리즘
 
 - 슬라이딩 윈도우 알고리즘은 범위가 고정되어 있지만, 투 포인터 알고리즘은 _범위가 동적으로 변한다_.
@@ -129,3 +131,43 @@ console.log(solution(3, a));
 3. 선택 절차(Selection Procedure): 각 단계에서 지역 최적해를 선택
 4. 적절성 검사(Feasibility Check): 선택이 문제의 조건을 만족하는지 검사 후 최종 결과에 반영
 5. 해답 검사(Solution Check): 전체 문제가 해결되었는지 검사 후 그렇지 않으면 선택 절차로 돌아가 과정을 반복
+
+## Binary Search;이진탐색(이분검색)
+
+- 정렬되어 있는 배열에서 탐색 범위를 절반으로 좁혀가면서 특정 값을 찾는 방법
+- 시간복잡도는 O(logN)으로 배열 전체를 순차탐색하는 것(O(N))보다 상대적으로 빠르게 해결할 수 있다.
+- 결정문제(Decision Problem)의 답이 이분적(yes/no)일 때 사용할 수 있다.
+
+### 절차
+
+1. 배열이 정렬되어있지 않다면 정렬
+2. 배열의 처음과 끝 index를 각각 `lt`와 `rt` 변수로 정의
+3. `(lt + rt) / 2` 한 중앙 index `mid` 변수 정의
+   - 문제가 배열에서 값을 찾는 것이 아닐 경우, 조건 k가 있을 예상 범위에서 변수를 설정해야 한다.
+4. 배열의 중앙 요소 `arr[mid]` 를 주어진 조건 k 와 비교
+5. k 가 중앙 요소와 일치하면 실행문 종료, 그렇지 않을 경우 다음 탐색 범위로 사용할 방향을 선택
+   - 중앙 요소가 k 보다 크면(`arr[mid] > k`) 왼쪽이 다음 탐색에 사용(`rt = mid - 1`)
+   - 중앙 요소가 k 보다 작으면(`arr[mid] < k`) 오른쪽이 다음 탐색에 사용(`lt = mid + 1`)
+6. k 를 찾거나(`arr[mid] === k`) 전체 탐색 범위가 소진될 때까지(`lt >= rt`) 반복
+
+```js
+// section7 10번 문제
+const solution = (target, arr) => {
+  let answer;
+  let lt = 0;
+  let rt = arr.length - 1;
+
+  arr.sort((a, b) => a - b);
+  while (lt <= rt) {
+    let mid = parseInt((lt + rt) / 2);
+    if (arr[mid] === target) {
+      // 몇 번째에 있는지 출력하므로 + 1
+      answer = mid + 1;
+      break;
+    }
+    if (arr[mid] > target) rt = mid - 1;
+    else lt = mid + 1;
+  }
+  return answer;
+};
+```

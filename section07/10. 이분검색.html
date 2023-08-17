@@ -1,0 +1,34 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // N개의 수가 있는 배열 arr 을 오름차순으로 정렬한 다음,
+      // 이분검색(이진탐색)하여 숫자 target 이 배열의 몇 번째에 있는지 출력
+      // 단 중복값은 존재하지 않는다.
+      const solution = (target, arr) => {
+        let answer;
+        let lt = 0;
+        let rt = arr.length - 1;
+
+        arr.sort((a, b) => a - b);
+        while (lt <= rt) {
+          let mid = parseInt((lt + rt) / 2);
+          if (arr[mid] === target) {
+            // 몇 번째에 있는지 출력하므로 + 1
+            answer = mid + 1;
+            break;
+          }
+          if (arr[mid] > target) rt = mid - 1;
+          else lt = mid + 1;
+        }
+        return answer;
+      };
+
+      let arr = [23, 87, 65, 12, 57, 32, 99, 81];
+      console.log(solution(32, arr));
+    </script>
+  </body>
+</html>

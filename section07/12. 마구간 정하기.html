@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // N개의 마구간이 수직선상에 있고, 각 마구간은 x1, x2, x3, ......, xN의 좌표를 가진다.
+      // 각 마구간에는 한 마리의 말만 넣을 수 있고, 가장 가까운 두 말의 거리가 최대가 되게 말을 마구간에 배치하려 한다.
+      // C마리의 말을 N개의 마구간에 배치했을 때 가장 가까운 두 말의 최대 거리를 출력
+      const count = (stable, distance) => {
+        // cnt: 마구간에 들어간 말의 예상 총 마릿수. 첫 loop 일 때 1
+        // endPos: 바로 직전 말이 들어간 마구간의 좌표, 0번째부터 시작
+        let cnt = 1;
+        let endPos = stable[0];
+        // endPos 가 stable[0] 이므로 2번째 마구간부터 시작
+        for (let i = 1; i < stable.length; i++) {
+          // 두 말 사이의 거리가 mid 보다 크거나 같다면
+          if (stable[i] - endPos >= distance) {
+            cnt++;
+            endPos = stable[i];
+          }
+        }
+        return cnt;
+      };
+
+      const solution = (c, stable) => {
+        let answer = 0;
+
+        stable.sort((a, b) => a - b);
+        // 말 사이의 예상 최대 거리는 1 ~ 9 사이의 수이다
+        let lt = 1;
+        let rt = stable[stable.length - 1];
+
+        while (lt <= rt) {
+          // mid: 가장 가까운 두 말 사이의 예상 거리
+          let mid = parseInt((lt + rt) / 2);
+          // 가장 가까운 두 말 사이의 예상 거리가 mid 일 때,
+          // 마구간에 들어간 말의 수가 c보다 크거나 같다면
+          if (count(stable, mid) >= c) {
+            answer = mid;
+            lt = mid + 1;
+          } else rt = mid - 1;
+        }
+        return answer;
+      };
+
+      let arr = [1, 2, 8, 4, 9];
+      console.log(solution(3, arr));
+    </script>
+  </body>
+</html>
