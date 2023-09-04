@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 10진수 N을 재귀함수를 사용해 2진수로 변환하여 출력
+      const solution = (n) => {
+        let answer = "";
+        const DFS = (v) => {
+          if (v === 0) return;
+          DFS(Math.floor(v / 2));
+          answer += String(v % 2);
+        };
+
+        DFS(n);
+        return answer;
+      };
+
+      console.log(solution(11));
+    </script>
+  </body>
+</html>

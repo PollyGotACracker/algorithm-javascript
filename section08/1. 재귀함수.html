@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 재귀함수를 사용해 1부터 N까지 출력
+      const solution = (n) => {
+        const DFS = (v) => {
+          if (v === 0) return;
+          DFS(v - 1);
+          console.log(v);
+        };
+
+        DFS(n);
+      };
+
+      solution(3);
+    </script>
+  </body>
+</html>

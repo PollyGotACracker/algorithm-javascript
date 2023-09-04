@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 다음 이진트리를 각 순회방식으로 출력
+      /*
+      1
+      ┣ 2
+      ┃ ┣ 4
+      ┃ ┗ 5
+      ┣ 3
+      ┃ ┣ 6
+      ┃ ┗ 7
+      */
+      // 전위순회 출력 : 1 2 4 5 3 6 7
+      // 중위순회 출력 : 4 2 5 1 6 3 7
+      // 후위순회 출력 : 4 5 2 6 7 3 1
+      const solution = (n) => {
+        let answer = "";
+        let preOrder = "";
+        let inOrder = "";
+        let postOrder = "";
+
+        // 왼쪽 자식 노드: 부모 * 2
+        // 오른쪽 자식 노드: 부모 * 2 + 1
+        const DFS = (v) => {
+          if (v > 7) return;
+          preOrder += v + " ";
+          DFS(v * 2);
+          inOrder += v + " ";
+          DFS(v * 2 + 1);
+          postOrder += v + " ";
+        };
+
+        DFS(n);
+        answer = `${preOrder}\n${inOrder}\n${postOrder}`;
+        return answer;
+      };
+
+      console.log(solution(1));
+    </script>
+  </body>
+</html>
