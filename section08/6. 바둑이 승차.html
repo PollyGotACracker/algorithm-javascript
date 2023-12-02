@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 트럭이 태울 수 있는 무게 c 와 n마리 바둑이들의 무게가 담긴 배열 arr 이 주어지면
+      // c 를 넘지 않으면서 가장 무겁게 태울 수 있는 바둑이들 무게의 합을 출력
+      const solution = (c, arr) => {
+        let answer = Number.MIN_SAFE_INTEGER;
+        const n = arr.length;
+
+        const DFS = (L, sum) => {
+          if (sum > c) return;
+          if (L === n) {
+            if (sum > answer) answer = sum;
+            // answer=Math.max(answer, sum);
+          } else {
+            DFS(L + 1, sum + arr[L]);
+            DFS(L + 1, sum);
+          }
+        };
+        DFS(0, 0);
+        return answer;
+      };
+
+      let arr = [81, 58, 42, 33, 61];
+      console.log(solution(259, arr));
+    </script>
+  </body>
+</html>

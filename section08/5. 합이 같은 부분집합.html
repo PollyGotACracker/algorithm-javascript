@@ -1,0 +1,46 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 아마존 인터뷰
+       * 자연수 집합 arr 을 두 개의 부분집합으로 나누었을 때,
+       * 두 부분집합의 원소의 합이 서로 같은 경우가 존재하면 "YES",
+       * 그렇지 않으면 "NO" 를 출력
+       * 두 부분집합은 서로소 집합이며, 이를 합하면 주어진 원래의 집합이 되어야 한다.
+       * ex) {1, 3, 5, 6, 7, 10} 에서 {1, 3, 5, 7} 과 {6, 10}: 두 부분집합의 합은 16으로 같다.
+       */
+      const solution = (arr) => {
+        let answer = "NO";
+        let flag = 0;
+        const total = arr.reduce((a, b) => a + b, 0);
+        const n = arr.length; // + 1
+
+        // L: arr 의 인덱스
+        // sum: 부분집합 원소의 합
+        const DFS = (L, sum) => {
+          if (flag) return;
+          // 부분집합 완성, 재귀호출 중단
+          if (L === n) {
+            if (total - sum === sum) {
+              answer = "YES";
+              flag = 1;
+            }
+          } else {
+            // sum 에 arr[L] 값을 포함, 또는 미포함
+            DFS(L + 1, sum + arr[L]);
+            DFS(L + 1, sum);
+          }
+        };
+        DFS(0, 0);
+        return answer;
+      };
+
+      let arr = [1, 3, 5, 6, 7, 10];
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>

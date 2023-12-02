@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 1부터 N까지의 원소를 갖는 집합의 모든 부분집합 문자열을 배열에 담아 출력
+      // 공집합은 제외할 것
+      const solution = (n) => {
+        // root 값을 1 로 지정하고(인수) 1씩 증가시키며 이진탐색(해당 값 포함 1, 미포함 0 경우)
+        // 인수가 n + 1 (부분집합 완성) 일 때 반복문에서 포함인 값만 추가
+        let answer = [];
+        // 경우의 수를 저장하기 위한 배열로 인덱스 0 은 사용되지 않음
+        // 할당순서: 0111 0110 0101 0100 0011 0010 0001 0000(공집합)
+        let check = Array.from({ length: n + 1 }, () => 0);
+
+        // L: tree level(depth)
+        const DFS = (L) => {
+          // 부분집합 완성, 재귀 호출이 중단되고 이전 재귀 호출 실행
+          if (L === n + 1) {
+            let subset = "";
+            for (let i = 1; i <= n; i++) {
+              if (check[i] === 1) subset += i + " ";
+            }
+            if (!!subset) answer.push(subset.trim());
+          } else {
+            // 이진 탐색
+            check[L] = 1; // true(포함)
+            DFS(L + 1);
+            check[L] = 0; // false(미포함)
+            DFS(L + 1);
+          }
+        };
+        DFS(1);
+        return answer;
+      };
+
+      console.log(solution(3));
+    </script>
+  </body>
+</html>
