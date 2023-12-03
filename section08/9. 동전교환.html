@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 거스름돈을 여러 단위의 동전들을 사용해 최소 개수의 동전으로 주려면
+      // 어떻게 줘야 하는지 출력
+      // 각 단위의 동전은 무한정 사용 가능하다.
+      // m 은 거슬러 줄 금액, arr 은 동전의 종류
+      const solution = (m, arr) => {
+        let answer = Number.MAX_SAFE_INTEGER;
+        const n = arr.length;
+        // L 은 answer(Depth), sum 은 m 과 대응
+        const DFS = (L, sum) => {
+          if (L >= answer) return;
+          if (sum > m) return; // 불필요한 연산 방지
+          if (sum === m) {
+            answer = Math.min(answer, L);
+          } else {
+            // 동전 개수 + 1, 이전 sum + 각 동전 단위별 실행
+            for (let i = 0; i < n; i++) {
+              DFS(L + 1, sum + arr[i]);
+            }
+          }
+        };
+        DFS(0, 0);
+        return answer;
+      };
+
+      let arr = [1, 2, 5];
+      console.log(solution(15, arr));
+    </script>
+  </body>
+</html>

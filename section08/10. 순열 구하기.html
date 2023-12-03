@@ -1,0 +1,69 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 10 이하의 여러 자연수가 배열로 주어지면 m개를 뽑아 일렬로 나열하는 모든 방법을 출력
+      const solution = (m, arr) => {
+        const answer = [];
+        const n = arr.length;
+        const chk = Array.from({ length: n }, () => 0); // arr 와 대조하여 중복 배제(이미 뽑은 값은 0)
+        const tmp = Array.from({ length: m }, () => 0); // 뽑은 값(조합)
+
+        // L: 뽑은 수. tmp 인덱스 0 ~ 1
+        const DFS = (L) => {
+          if (L === m) {
+            answer.push([...tmp]);
+          } else {
+            // i: 각 경우의 수, arr[i] 는 해당 값
+            // 즉 반복문은 특정 부모 노드의 모든 자식 노드들을 탐색하여
+            // 가능한 모든 조합을 생성
+            for (let i = 0; i < n; i++) {
+              // 중복 배제를 위해 chk[i] 값을 변경
+              // 상위 노드 값은 chk[i] 값이 1 인 상태
+              if (chk[i] === 0) {
+                chk[i] = 1;
+                tmp[L] = arr[i]; // arr 의 i 인덱스 값을 현재 조합에 추가
+                DFS(L + 1);
+                chk[i] = 0; // 반복문이 재귀적으로 실행될 때 조건문 통과를 위함
+              }
+            }
+          }
+        };
+        DFS(0);
+        return answer;
+      };
+
+      let arr = [3, 6, 9];
+      console.log(solution(2, arr));
+
+      /*
+      const solution = (m, arr) => {
+        const answer = [];
+        const n = arr.length;
+        const ch = Array.from({ length: n }, () => 0);
+        const tmp = [];
+        const DFS = (L) => {
+          if (L === m) {
+            answer.push(tmp.slice());
+          } else {
+            for (let i = 0; i < n; i++) {
+              if (ch[i] === 0) {
+                ch[i] = 1;
+                tmp.push(arr[i]);
+                DFS(L + 1);
+                ch[i] = 0;
+                tmp.pop();
+              }
+            }
+          }
+        };
+        DFS(0);
+        return answer;
+      };
+      */
+    </script>
+  </body>
+</html>
