@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 아래 공식을 사용하여 재귀를 이용해 조합의 경우수 출력
+      // nCr = n-1Cr-1 + n-1Cr
+      const solution = (n, r) => {
+        let answer = [];
+        // 재귀적으로 계산될 때 중복되는 nCr 값이 있으므로 2차원 배열에 메모이제이션
+        // 메모이제이션을 하면 시간복잡도가 크게 감소(큰 수로 테스트)
+        // Array.from(행,열) 임의의 행과 열 개수를 넣고 0 으로 초기화
+        let dy = Array.from(Array(35), () => Array(35).fill(0));
+
+        const DFS = (n, r) => {
+          // dy 에 저장되어 있다면 해당 값을 return
+          if (dy[n][r] > 0) return dy[n][r];
+          // nCn 이거나 nC0 일 때 경우의 수는 1
+          // (집합에서 모든 원소를 선택, 공집합)
+          if (n === r || r === 0) return 1;
+          else return (dy[n][r] = DFS(n - 1, r - 1) + DFS(n - 1, r));
+        };
+        answer = DFS(n, r);
+        return answer;
+      };
+
+      console.log(solution(5, 3));
+    </script>
+  </body>
+</html>

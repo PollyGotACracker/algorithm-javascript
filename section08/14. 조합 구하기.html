@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 1 ~ n 까지 번호가 적힌 구슬 중 m 개를 뽑는 방법을 모두 출력
+      const solution = (n, m) => {
+        const answer = [];
+        const tmp = Array.from({ length: m }, () => 0);
+
+        const DFS = (L, s) => {
+          if (L === m) {
+            answer.push([...tmp]);
+          } else {
+            for (let i = s; i <= n; i++) {
+              tmp[L] = i;
+              DFS(L + 1, i + 1);
+            }
+          }
+        };
+        DFS(0, 1);
+        return answer;
+      };
+
+      console.log(solution(4, 2));
+    </script>
+  </body>
+</html>
