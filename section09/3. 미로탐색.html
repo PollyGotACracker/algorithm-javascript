@@ -1,0 +1,60 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 7*7 격자판 미로를 탈출 경로의 모든 가짓수를 출력
+      // 출발점은 1,1 좌표이고, 도착점 7,7 좌표이다.
+      // 격자판의 1은 벽, 0은 통로이며, 상하좌우로만 움직인다.
+      const solution = (board) => {
+        let answer = 0;
+        // 현재 위치에서 주변의 x, y 좌표 계산에 필요한 값
+        // -1,0(12시) 0,1(3시) 1,0(6시) 0,-1(9시)
+        const dx = [-1, 0, 1, 0];
+        const dy = [0, 1, 0, -1];
+
+        const DFS = (x, y) => {
+          // 6행 6열(7,7)
+          if (x === 6 && y === 6) answer++;
+          else {
+            // 현재 위치에서 상하좌우 탐색
+            for (let k = 0; k < 4; k++) {
+              // 방문할 위치의 x, y 좌표 계산
+              let nx = x + dx[k];
+              let ny = y + dy[k];
+              // 지나갈 수 있는 경로인가?
+              if (
+                nx >= 0 &&
+                nx <= 6 &&
+                ny >= 0 &&
+                ny <= 6 &&
+                board[nx][ny] === 0
+              ) {
+                board[nx][ny] = 1;
+                DFS(nx, ny);
+                board[nx][ny] = 0;
+              }
+            }
+          }
+        };
+        board[0][0] = 1;
+        DFS(0, 0);
+        return answer;
+      };
+
+      let arr = [
+        [0, 0, 0, 0, 0, 0, 0],
+        [0, 1, 1, 1, 1, 1, 0],
+        [0, 0, 0, 1, 0, 0, 0],
+        [1, 1, 0, 1, 0, 1, 1],
+        [1, 1, 0, 0, 0, 0, 1],
+        [1, 1, 0, 1, 1, 0, 0],
+        [1, 0, 0, 0, 0, 0, 0],
+      ];
+
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
