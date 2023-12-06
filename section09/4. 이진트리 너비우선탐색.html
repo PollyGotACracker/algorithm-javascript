@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 다음 이진트리를 너비우선탐색(BFS) 하여 출력
+      /*
+      1
+      ┣ 2
+      ┃ ┣ 4
+      ┃ ┗ 5
+      ┣ 3
+      ┃ ┣ 6
+      ┃ ┗ 7
+      */
+      const solution = () => {
+        let answer = "";
+        const queue = [];
+
+        // 루트 노드 1부터 시작
+        queue.push(1);
+        // queue 길이가 0 이 될 때까지
+        while (queue.length) {
+          console.log(queue);
+          // 배열에서 첫 번째 요소를 반환(배열 변형)
+          let v = queue.shift();
+          answer += v + " ";
+          // 다음 depth(자식 노드들) 탐색
+          // 각각 부모 노드의 2배, 2배 + 1
+          for (let nv of [v * 2, v * 2 + 1]) {
+            // nv 값이 7 초과일 경우 continue 하여 다음 반복으로 넘어감
+            // queue.shift() 를 실행하면 queue 가 비어 반복문 종료
+            if (nv > 7) continue;
+            queue.push(nv);
+          }
+        }
+        return answer;
+      };
+
+      console.log(solution());
+    </script>
+  </body>
+</html>

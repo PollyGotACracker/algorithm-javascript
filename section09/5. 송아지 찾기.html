@@ -1,0 +1,74 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 송아지 주인의 위치와 잃어버린 송아지의 위치가 수직선상 좌표 점으로 주어진다.
+      // 주인의 위치는 s, 송아지의 위치는 e, 직선의 좌표 점은 1부터 10000까지이다.
+      // 주인은 한 번의 점프로 앞으로 1, 뒤로 1, 앞으로 5 를 이동할 수 있다.
+      // 송아지의 위치는 변하지 않는다.
+      // 최소 몇 번의 점프로 주인이 송아지 위치까지 갈 수 있는지 출력
+      const solution = (s, e) => {
+        // * distance 배열 이용
+        let answer = 0;
+        // check: 이전 탐색에서 도착했던 지점(index)인 경우 재계산 방지
+        const ch = Array.from({ length: 10001 }, () => 0);
+        // distance: 현재 지점(index)까지 이동했던 횟수 저장
+        const dis = Array.from({ length: 10001 }, () => 0);
+        const queue = [];
+
+        // 주인의 출발 지점에서부터 시작
+        queue.push(s);
+        ch[s] = 1;
+        dis[s] = 0;
+        while (queue.length) {
+          let x = queue.shift();
+          // 현재 지점에서부터 점프할 수 있는 거리(경우)를 모두 탐색
+          for (let nx of [x - 1, x + 1, x + 5]) {
+            // 도착한 경우 바로 점프 횟수 + 1 후 종료
+            if (nx === e) return dis[x] + 1;
+            if (nx > 0 && nx <= 10000 && ch[nx] === 0) {
+              ch[nx] = 1;
+              // 새 지점을 큐에 저장
+              queue.push(nx);
+              dis[nx] = dis[x] + 1;
+            }
+          }
+        }
+        return answer;
+      };
+
+      console.log(solution(8, 3));
+
+      /*
+      const solution = (s, e) => {
+        // * level;depth(L 변수) 이용
+        let answer = 0;
+        const ch = Array.from({ length: 10001 }, () => 0);
+        const queue = [];
+
+        queue.push(s);
+        ch[s] = 1;
+        let L = 0;
+        while (queue.length) {
+          let len = queue.length;
+          for (let i = 0; i < len; i++) {
+            let x = queue.shift();
+            for (let nx of [x - 1, x + 1, x + 5]) {
+              if (nx === e) return L + 1;
+              if (nx > 0 && nx <= 10000 && ch[nx] === 0) {
+                ch[nx] = 1;
+                queue.push(nx);
+              }
+            }
+          }
+          L++;
+        }
+        return answer;
+      };
+      */
+    </script>
+  </body>
+</html>

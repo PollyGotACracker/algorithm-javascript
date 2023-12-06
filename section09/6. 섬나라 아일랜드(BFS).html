@@ -1,0 +1,70 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 섬나라 아일랜드의 지도가 N*N 의 이차원 배열로 주어진다.
+      // 각 섬은 1 로 표시되어 상하좌우 및 대각선으로 연결되어 있으며, 0 은 바다이다.
+      // BFS 를 활용하여 섬나라 아일랜드에 몇 개의 섬이 있는지 출력
+      const solution = (board) => {
+        let answer = 0;
+        const n = board.length;
+        const dx = [-1, -1, 0, 1, 1, 1, 0, -1];
+        const dy = [0, 1, 1, 1, 0, -1, -1, -1];
+        const queue = [];
+
+        // 4중 반복
+        // 이차원 배열 board 의 행과 열인 i, j 순회
+        for (let i = 0; i < n; i++) {
+          for (let j = 0; j < n; j++) {
+            // 섬일 경우
+            if (board[i][j] === 1) {
+              // 섬의 시작점 방문, 재방문 X
+              // board[nx][ny] = 0; 와 시점이 다르므로 잠재적인 문제 방지
+              board[i][j] = 0;
+              // queue 에 현재 지점 배열 추가
+              queue.push([i, j]);
+              answer++;
+              while (queue.length) {
+                let [x, y] = queue.shift();
+                // 상하좌우 및 대각선의 8방향 탐색
+                for (let k = 0; k < 8; k++) {
+                  let nx = x + dx[k];
+                  let ny = y + dy[k];
+                  // board 내 섬일 경우
+                  if (
+                    nx >= 0 &&
+                    nx < n &&
+                    ny >= 0 &&
+                    ny < n &&
+                    board[nx][ny] === 1
+                  ) {
+                    // 재방문 X
+                    board[nx][ny] = 0;
+                    // 새 지점 배열을 다음 탐색 queue 에 추가
+                    queue.push([nx, ny]);
+                  }
+                }
+              }
+            }
+          }
+        }
+        return answer;
+      };
+
+      let arr = [
+        [1, 1, 0, 0, 0, 1, 0],
+        [0, 1, 1, 0, 1, 1, 0],
+        [0, 1, 0, 0, 0, 0, 0],
+        [0, 0, 0, 1, 0, 1, 1],
+        [1, 1, 0, 1, 1, 0, 0],
+        [1, 0, 0, 0, 1, 0, 0],
+        [1, 0, 1, 0, 1, 0, 0],
+      ];
+
+      console.log(solution(arr));
+    </script>
+  </body>
+</html>
