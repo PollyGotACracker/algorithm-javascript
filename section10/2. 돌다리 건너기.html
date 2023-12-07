@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 개울에 n 개의 돌로 다리가 만들어져 있다.
+      // 돌다리를 건널 때 한번에 한 칸 또는 두 칸씩 건너뛰면서 건널 경우,
+      // 개울을 건너는 방법의 가짓수를 출력
+      const solution = (n) => {
+        let answer = 0;
+        // 돌다리를 전부 건너야 하기 때문에 인덱스가 n + 1 이어야 한다.
+        const dy = Array.from({ length: n + 2 }, () => 0);
+
+        dy[1] = 1;
+        dy[2] = 2;
+        for (let i = 3; i <= n + 1; i++) {
+          dy[i] = dy[i - 2] + dy[i - 1];
+        }
+        answer = dy[n + 1];
+        return answer;
+      };
+
+      console.log(solution(7));
+    </script>
+  </body>
+</html>

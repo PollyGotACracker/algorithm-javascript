@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 학생 A가 제한시간 m 안에 n개의 문제를 풀었을 때 얻을 수 있는 최대 점수를 출력
+      // arr 의 첫 번째 값은 각 문제를 풀었을 때 얻는 점수,
+      // 두 번째 값은 학생 A가 푸는 데 걸리는 시간이다.
+      // 조합을 사용한 냅색 알고리즘
+      const solution = (m, arr) => {
+        let answer = 0;
+        // 제한시간 0 ~ m 까지 얻을 수 있는 최대 점수 저장
+        const dy = Array.from({ length: m + 1 }, () => 0);
+
+        // 외부 반복문은 각 항목 요소를 사용하여 작성
+        for (let i = 0; i < arr.length; i++) {
+          let [ps, pt] = arr[i];
+          // 내부 반복문은 제한값을 사용하여 작성
+          // 이전 동전교환처럼 작성할 경우, 같은 문제를 다시 풀게 된다.
+          // 중복 적용을 막으려면 뒤에서부터 값을 감소시켜야 한다.
+
+          // j 를 제한시간 m 으로 초기화 후,
+          // 현재 문제의 풀이시간이 될 때까지 j--
+          for (let j = m; j >= pt; j--) {
+            // dy[m] 부터 시작하여 dy[pt] 까지
+
+            // dy[j - pt] + ps: 현재 문제를 푼 후의 시간 j 에서의 최대 점수
+            // j - pt 는 j 에서 pt 를 제외한 시간(현재 문제를 풀기 전의 시간)
+            // dy[j - pt] 는 이전 문제들을 선택하여 계산된 위 시간에서의 최대 점수
+            // 이제 pt 를 더하여 시간 j 를 만들고, 현재 문제 점수를 더할 것이므로 + ps
+
+            // 기존에 계산된 값과 새로 계산한 값 비교
+            dy[j] = Math.max(dy[j], dy[j - pt] + ps);
+          }
+        }
+        answer = dy[m];
+        return answer;
+      };
+
+      let arr = [
+        [10, 5],
+        [25, 12],
+        [15, 8],
+        [6, 3],
+        [7, 4],
+      ];
+      console.log(solution(20, arr));
+    </script>
+  </body>
+</html>

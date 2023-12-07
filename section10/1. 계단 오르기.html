@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>출력결과</title>
+  </head>
+  <body>
+    <script>
+      // 계단을 오를 때 한 번에 한 계단 또는 두 계단씩 올라간다면,
+      // n 개의 계단에서 올라갈 수 있는 방법의 가짓수 출력
+      // Dynamic Programming(동적계획법)
+      const solution = (n) => {
+        let answer = 0;
+        // dynamic 배열: 다이나믹 테이블. n 번째에 정답이 기록됨
+        const dy = Array.from({ length: n + 1 }, () => 0);
+
+        dy[1] = 1;
+        dy[2] = 2;
+        // 현재 위치의 계단에 오르기 위한 경우의 수는
+        // 직전 2개 계단의 값을 더한 값이다.
+        for (let i = 3; i <= n; i++) {
+          dy[i] = dy[i - 2] + dy[i - 1];
+        }
+        answer = dy[n];
+        return answer;
+      };
+
+      console.log(solution(7));
+    </script>
+  </body>
+</html>
