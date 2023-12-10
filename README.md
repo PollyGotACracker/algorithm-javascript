@@ -6,7 +6,9 @@
 
 ## 공부
 
-### [Algorithm 정리](/algorithm.md)
+- [note 폴더](/note)
+- [wikidocs.net: 다빈치코딩 알고리즘](https://wikidocs.net/book/10280)
+- [geeksforgeeks.org: DSA for Beginners](https://www.geeksforgeeks.org/complete-guide-to-dsa-for-beginners/)
 
 ### `Math.floor()` 와 `parseInt()`
 
