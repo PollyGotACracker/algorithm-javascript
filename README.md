@@ -10,6 +10,32 @@
 - [wikidocs.net: 다빈치코딩 알고리즘](https://wikidocs.net/book/10280)
 - [geeksforgeeks.org: DSA for Beginners](https://www.geeksforgeeks.org/complete-guide-to-dsa-for-beginners/)
 
+### `Array.slice()` 와 `Array.splice()`
+
+- `slice()` 와 달리 `splice()` 는 원본 배열을 변경한다.
+- 두 번째 매개변수로 `slice()` 는 end(반환받을 마지막 요소의 index + 1. end 위치의 이전 요소까지 잘라냄),  
+  `splice()` 는 deleteCount(배열에서 제거할 요소의 수)를 받는다.
+- `splice()` 는 세 번째 매개변수부터 삭제한 위치부터 추가할 요소를 받는다.
+
+### `String.match()` 와 `String.matchAll()`
+
+- `match()` 는 배열, `matchAll()` 은 RegExpStringIterator 반환
+- `match()` 는 `g` 플래그 없을 경우 일치하는 첫 부분만 반환, `matchAll()` 은 `g` 플래그 무조건 필요
+- `match()` `matchAll()` 모두 두 번째 매개변수는 콜백함수를 받는다.
+
+```js
+function replacer(match, p1, p2, …, pN, offset, string, groups) {
+  return replacement;
+}
+/*
+match: 일치하는 문자열
+p1, p2, …, pN: 정규표현식에서 캡처 그룹 () 으로 찾은 각 문자열
+offset: 검사한 전체 문자열에서 match 문자열의 인덱스
+string: 검사한 전체 문자열
+groups: 이름이 있는 캡처 그룹 (?<name>...) 객체: groups.name
+*/
+```
+
 ### `Math.floor()` 와 `parseInt()`
 
 - 값이 음수일 경우 반환값이 달라진다.
